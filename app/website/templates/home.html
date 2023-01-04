@@ -3,13 +3,14 @@
     <h1 align="center">My Recipes</h1>
     
     <ul class="list-group list-group-flush" id="recipes">
-      <table>
+      <table id="my recipe list" class="table table-striped">
         <tr>
           <th>Category</th>
           <th>Name</th>
+          <th></th>
+          <th></th>
         </tr>
       {% for recipe in user.recipes %}
-      <li class="list-group-item">
         <tr>
           <td>{{ recipe.category }}</td>
           <td>{{ recipe.name }}</td>
@@ -24,7 +25,6 @@
             </button>
           </td>
         </tr>
-      </li>
       {% endfor %}
       </table>
     </ul>

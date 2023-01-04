@@ -38,10 +38,6 @@ def logout():
 @login_required
 def main():
     return redirect(url_for('views.main'))
-    
-#@auth.route('/recipe', methods=['GET', 'POST'])
-#def recipe():
-#    return redirect(url_for('views.get_recipe'))
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():

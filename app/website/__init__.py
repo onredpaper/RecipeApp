@@ -9,7 +9,7 @@ DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
+    app.config['SECRET_KEY'] = 'this is my secret key'
     
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@db/recipe'
     db.init_app(app)
@@ -51,12 +51,6 @@ def create_database(app):
             user
         except:
             newuser = User(first_name='Randall Chan', email='randall-chan@rocketmail.com', password=generate_password_hash('password', method='sha256'))
-            # newuser = User(first_name='Isabelle Chan', email='isabelle.a.chan@gmail.com', password=generate_password_hash('littlehelper', method='sha256'))
             print(newuser)
-            #app.app_context().push()
             db.session.add(newuser)
-            #ac = User(first_name='Ayesha Curry', email='info@sweetjuly.com', password=generate_password_hash('splash', method='sha256'))
-            #db.session.add(ac)
-            #ic = User(first_name='Isabelle Chan', email='isabelle.a.chan@gmail.com', password=generate_password_hash('littlehelper', method='sha256'))
-            #db.session.add(ic)
             db.session.commit()

@@ -42,14 +42,6 @@ def delete_recipe():
             db.session.commit()
     return jsonify({})
 
-
-@views.route('/getrecipe', methods=['GET', 'POST'])
-def getrecipe():
-    recipe_json = json.loads(request.data)
-    #recipeId = recipe_json['recipeId']
-    #recipe = Recipe.query.get(id=recipeId)
-    return jsonify(recipe_json)
-
 @views.route('/recipe', methods=['GET', 'POST'])
 def recipe():
     if request.method == 'POST':
@@ -57,4 +49,4 @@ def recipe():
         recipe = Recipe.query.get(recipe_id)
         return render_template("recipe.html", user=current_user, recipe=recipe)
     else:
-        return render_template("recipe.html", user=current_user, recipe=Recipe.query.get(2))
+        flash('Unable to find recipe.', category='error')
