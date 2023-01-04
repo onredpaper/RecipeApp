@@ -10,7 +10,12 @@ views = Blueprint('views', __name__)
 @login_required
 def home():
     if request.method == 'POST':
-        #note = request.form.get('note')
+        recipe_id = request.form.get('recipeId')
+        if recipe_id:
+            # This is a load to edit, load the recipe to fill fields
+            recipe = Recipe.query.get(recipe_id)
+            flash('Recipe loaded to be editted', category='success')
+            return render_template("home.html", user=current_user, edit_recipe=recipe)
         recipe_name = request.form.get('name')
         servings = request.form.get('servings')
         category = request.form.get('category')
@@ -19,10 +24,23 @@ def home():
         note = request.form.get('note')
 
         if recipe_name:
-            new_recipe = Recipe(name=recipe_name, user_id=current_user.id, servings=servings, category=category, ingredients=ingredient, instructions=step, notes=note)
-            db.session.add(new_recipe)
+            recipe = Recipe.query.filter_by(name=recipe_name).first()
+            if recipe:
+                # This is an edit
+                recipe.name = recipe_name
+                recipe.servings = servings
+                recipe.category = category
+                recipe.ingredient = ingredient
+                recipe.step = step
+                recipe.note = note
+                flash_text = 'Recipe updated!'
+            else:
+                new_recipe = Recipe(name=recipe_name, user_id=current_user.id, servings=servings, category=category, ingredients=ingredient, instructions=step, notes=note)
+                db.session.add(new_recipe)
+                flash_text = 'Recipe added!'
+            
             db.session.commit()
-            flash('Recipe added!', category='success')
+            flash(flash_text, category='success')
 
     return render_template("home.html", user=current_user)
 
