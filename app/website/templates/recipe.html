@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %}Recipe{% endblock %} {% block content
+    %}
+
+      <h1 align="center">{{ recipe.name }}</h1>
+    
+      <table id="recipe" class="table table-striped">
+        <tr>
+          <th>Category</th> <td>{{ recipe.category }}</td>
+        </tr>
+        <tr>
+          <th>Servings</th> <td>{{ recipe.servings }}</td>
+        </tr>
+        <tr>
+          <th>Ingredients</th> <td><pre>{{ recipe.ingredients }}</pre></td>
+        </tr>
+        <tr>
+          <th>Instructions</th> <td><pre>{{ recipe.instructions }}</pre></td>
+        </tr>
+      </table>
+
+    {% endblock %}

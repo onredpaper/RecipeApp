@@ -1,0 +1,93 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+    <h1 align="center">My Recipes</h1>
+    
+    <ul class="list-group list-group-flush" id="recipes">
+      <table>
+        <tr>
+          <th>Category</th>
+          <th>Name</th>
+        </tr>
+      {% for recipe in user.recipes %}
+      <li class="list-group-item">
+        <tr>
+          <td>{{ recipe.category }}</td>
+          <td>{{ recipe.name }}</td>
+          <td>
+            <form action="/recipe" method="POST">
+              <button type="submit" name="recipeId" value={{recipe.id}}">View</button>
+            </form>
+          </td>
+          <td>
+            <button type="button" class="open" onClick="deleteRecipe({{ recipe.id }})">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </td>
+        </tr>
+      </li>
+      {% endfor %}
+      </table>
+    </ul>
+    <br />
+    <form method="POST">
+      <h3 align="center">Create Recipe</h3>
+      <div class="form-group">
+        <label for="name">Name of Dish</label>
+        <input
+          type="name"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Enter name of dish"
+        />
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <input
+          type="text"
+          class="form-control"
+          id="category"
+          name="category"
+          placeholder="Enter category of dish"
+        />
+      </div>
+      <div class="form-group">
+        <label for="servings">Serving Size</label>
+        <input
+          type="text"
+          class="form-control"
+          id="servings"
+          name="servings"
+          placeholder="Enter number of servings"
+        />
+      </div>
+      <div class="form-group">
+        <label for="ingredient">Ingredients</label>
+        <textarea
+          class="form-control"
+          id="ingredient"
+          name="ingredient"
+          placeholder="Enter ingredients"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="step">Steps</label>
+        <textarea
+          class="form-control"
+          id="step"
+          name="step"
+          placeholder="Enter steps"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="note">Notes</label>
+        <textarea
+          class="form-control"
+          name="note"
+          id="note"
+          placeholder="Enter notes"></textarea>
+      <br />
+
+      <div align="center">
+        <button type="submit" class="btn btn-primary">Add Recipe</button>
+      </div>
+    </form>
+    {% endblock %}

@@ -1,0 +1,6 @@
+flask
+mysql-connector
+flask-login
+flask-sqlalchemy
+pyvim
+mysqlclient

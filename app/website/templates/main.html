@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block title %}Main{% endblock %} {% block content
+    %}
+    <script>
+    function pass(recipe_id) {
+      var params = new URLSearchParams();
+      params.append("recipe_id", recipe_id);
+      console.log(params);
+      location.href = "/recipe.html?" + params.toString();
+    }
+    </script>
+
+    <h1 align="center">All Recipes</h1>
+    <br />
+    <ul class="list-group list-group-flush" id="recipes">
+      <table id="recipe list" class="table table-striped">
+        <tr>
+          <th>Category</th>
+          <th>Dish</th>
+          <th>Owner</th>
+          <th></th>
+        </tr>
+      {% for recipe in recipes %}
+      <tr>
+        <td>{{ recipe.category }}</td>
+        <td>{{ recipe.name }}</td>
+        <td>{{ recipe.user_id }}</td>
+        <td>
+          <form action="/recipe" method="POST">
+            <button type="submit" name="recipeId" value={{recipe.id}}">View</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+      </table>
+    </ul>
+    <br />
+    {% endblock %}
